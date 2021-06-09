@@ -1,0 +1,178 @@
+﻿@model SistemaReservaEnLinea.Models.Eventos
+@using Microsoft.Extensions.Options
+@inject IOptions<SistemaReservaEnLinea.ViewModels.PaypalApiSetting> pSetting
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="inner_banner" class="inner_banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="inner-text">
+                    <h2>@Model.Titulo</h2>
+                    <div class="inner-link">
+                        <span><a href="~/">Inicio</a></span>
+                        <span>/</span>
+                        <span><a href="~/BuscarEvento">Reservación</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="tour-package" class="tour tour-other section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h4>Información para la reserva</h4>
+                <form id="formNewCommentAdd" action="~/Evento/EnviarComentaio/" method="post">
+                    <div class="comments-title d-md-none d-lg-none">
+                        <h4>Deja un comentario</h4>
+                    </div>
+                    <div class="row form-detail blogdetails_form">
+
+                        <div class="col-12 col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Nombre" required placeholder="Nombre" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <input type="email"
+                                       class="form-control"
+                                       placeholder="E-mail" name="email" required />
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <input type="tel"
+                                       class="form-control"
+                                       placeholder="Teléfono" name="Telefono" required />
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <div class="form-group">
+                                <input type="tel"
+                                       class="form-control"
+                                       placeholder="Dirección" name="Direccion" required />
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <div class="form-group">
+                                <textarea name="mensaje"
+                                          placeholder="Requerimientos especiales" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <div class="blog_grid_btn">
+                                <button type="submit" class="bro-btn2 btnAjaxAdd" data-formulario="#formNewCommentAdd">Comentar</button>
+                            </div>
+                        </div>
+                        <div class="col-8 col-md-8">
+                            <div class="blog_grid_btn">
+
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="PadreId" id="txtPadreId" />
+                        <input type="hidden" name="EventoId" value="@Model.Id" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Información de la reservación
+                    </div>
+                    <div class="card-body">
+                        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                @{
+                                    int cont = 0;
+                                    foreach (var item in Model.ImagenesAsociadas)
+                                    {
+                                        string strActivo = cont == 0 ? "active" : "";
+                                        <li data-target="#carouselExampleCaptions" data-slide-to="@cont" class="@strActivo"></li>
+                                        cont += 1;
+                                    }
+                                }
+                            </ol>
+                            <div class="carousel-inner">
+                                @{
+                                    cont = 0;
+                                    foreach (var item in Model.ImagenesAsociadas)
+                                    {
+                                        string strActivo = cont == 0 ? "active" : "";
+                                        string strImg = Url.Content("~/ImagesUpload/" + item.Imagenes.Imagen);
+                                        <div class="carousel-item @strActivo">
+                                            <img src="@strImg" class="d-block w-100" alt="@Model.Titulo">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>@Model.Titulo</h5>
+                                            </div>
+                                        </div>
+                                        cont += 1;
+                                    }
+                                }
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previo</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Siguiente</span>
+                            </a>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-6 text-center bg-light p-2">
+                                Check in<br />
+                                @ViewBag.CheckIn
+                            </div>
+                            <div class="col-md-6 text-center bg-light p-2">
+                                Check out<br />
+                                @ViewBag.CheckOut
+                            </div>
+                            <div class="col-md-6 text-center bg-light p-2 mt-2">
+                                Cantidad<br />
+                                @ViewBag.Cantidad
+                            </div>
+                            <div class="col-md-6 text-center bg-light p-2 mt-2">
+                                Total<br />
+                                @ViewBag.TotalReserva
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <table action="~/Reserva/EnviarReserva/">
+                                    <tr>
+                                        <td class="p-2">Total a pagar</td>
+                                        <td class="p-2">$ @ViewBag.TotalEvento</td>
+                                        <td class="p-2">
+                                            <button type="submit" class="btn btn-success btnAjaxAdd" data-toggle="modal" data-target="#FactModal">
+                                                <i class="fas fa-ticket-alt">
+                                                    Reservar
+                                                </i>
+                                            </button>
+                                        </td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="FactModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

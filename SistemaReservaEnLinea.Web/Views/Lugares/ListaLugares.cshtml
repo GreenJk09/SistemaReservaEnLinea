@@ -1,0 +1,97 @@
+﻿@model IEnumerable<SistemaReservaEnLinea.Models.Lugar>
+<table class="table table-bordered table-hover  mb-4">
+    <thead>
+        <tr>
+            <th>Escenario/Auditorium</th>
+            <th>Teléfono</th>
+            <th>Correo de contacto</th>
+            <th>Dirección</th>
+            <th class="text-center">Estatus</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Nombre</td>
+                        <td>@item.Telefono</td>
+                        <td>@item.Email</td>
+                        <td>@item.Direccion, @item.Ciudad, @item.Departamento, @item.CodigoPostal</td>
+                        <td class="text-center"><span class="text-secondary">@Html.Raw(item.Estatus == true ? "<span class=\"badge badge-success\">Activo</span>" : "<span class=\"badge badge-danger\">Inactivo</span>")</span></td>
+                        <td class="text-center">
+                            @if (item.Estatus == true)
+                            {
+                                <a class="bs-tooltip" href="~/Lugares/AddLugar/?Id=@item.Id" title="Modificar Escenario">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                         class="feather feather-edit icon">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                    </svg>
+                                </a>
+                                <a class="bs-tooltip" href="~/Eventos/?Id=@item.Id" title="Eventos">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers icon">
+                                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                        <polyline points="2 17 12 22 22 17"></polyline>
+                                        <polyline points="2 12 12 17 22 12"></polyline>
+                                    </svg>
+                                </a>
+                                <a href="#" class="bs-tooltip desactivarLugar" title="Desactivar Escenario" data-hotelid="@item.Id">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 icon">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                                    </svg>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="#" class="bs-tooltip activarLugar" title="Activar Escenario" data-hotelid="@item.Id">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle icon">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                </a>
+                            }
+
+
+
+                        </td>
+                    </tr>
+                }
+
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6"><h5 class="text-danger">Todavía no registra Escenario o Auditoriums</h5></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<script>
+    $('.bs-tooltip').tooltip();
+    $(".desactivarLugar").click(function () {
+        var lugarid = $(this).data("lugarid");
+        $("#txtHotelIdActDesact").val(lugarid);
+        $("#txtMovimientoActDesact").val("D");
+        $("#desactivarHotelbtn").trigger("click");
+    });
+
+    $(".activarLugar").click(function () {
+        var lugarid = $(this).data("lugarid");
+        $("#txtLugarIdActDesact").val(lugarid);
+        $("#txtMovimientoActDesact").val("A");
+        $("#desactivarLugarbtn").trigger("click");
+    });
+</script>

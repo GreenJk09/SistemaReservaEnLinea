@@ -1,0 +1,459 @@
+﻿@model SistemaReservaEnLinea.Models.Blog
+@{
+    ViewData["Title"] = "Bienvenidos";
+}
+<section class="banner" id="banner" style="background:url(@Html.Raw(Url.Content("~/FileUpload/" + Model.Imagen))) no-repeat;background-position: center;background-size: cover;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 banner-center">
+                <div class="banner-text">
+                    <h3>@Model.Descripcion</h3>
+                    <h2>@Model.Titulo</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section id="reservation-form" class="reservation">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="reserve">
+                    <div class="reservation-tabs">
+
+                        <ul class="nav nav-tabs search-opt">
+                            <li><a href="#hotels-tab" class="active" data-toggle="tab">Buscar Evento</a></li>
+                        </ul>
+
+                    </div>
+                    <div class="tab-content">
+                        <form id="hotels-tab" class="tab-pane form-inline reservation-hotel active" method="post" name="reservationform">
+                            <div class="row">
+                                <div class="col-md-3 step-where">
+                                    <div class="form-group">
+                                        <div class="content-checkin-data">
+                                            <label>
+                                                <i class="flaticon-door"></i>
+                                                Fecha de Inicio
+                                            </label>
+                                            <input type="text" id="datepicker" data-provide="datepicker" required class="field-input calendar-input" placeholder="dd/mm/yyyy">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3 step-where">
+                                    <div class="form-group">
+                                        <div class="content-checkin-data">
+                                            <label>
+                                                <i class="flaticon-door-1"></i>
+                                                Fecha de Cierre
+                                            </label>
+                                            <input type="text" id="datepicker1" data-provide="datepicker"  required class="field-input calendar-input" placeholder="dd/mm/yyyy">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-2 step-where">
+                                    <div class="form-group">
+                                        <div class="content-checkin-data">
+                                            <label>
+                                                <i class="flaticon-tourist"></i>
+                                                Catedraticos
+                                            </label>
+                                            <input type="number" id="traveller" class="field-input" required value="0" min="0" onfocus="if(this.value  == 'Catedraticos') { this.value = ''; } " onblur="if(this.value == '') { this.value = 'Catedraticos'; } " />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 step-where">
+                                    <div class="form-group">
+                                        <div class="content-checkin-data">
+                                            <label>
+                                                <i class="flaticon-tourist"></i>
+                                                Estudiantes
+                                            </label>
+                                            <input type="number" id="travellernin" class="field-input" value="0" min="0" onfocus="if(this.value  == 'Estudiantes') { this.value = ''; } " onblur="if(this.value == '') { this.value = 'Estudiantes'; } " />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <button class="banner-btn" id="btnBuscarEvento" style="cursor:pointer">Buscar</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+
+                        <!--********************* Flight reservation ********************-->
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="service" class="service">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-md-6">
+                <div class="service-inner border-col">
+                    <img src="~/images/service-icon-1.png" class="img-fluid" alt="">
+                    <div class="ser-text">
+                        <h2>Los mejores eventos</h2>
+                        <p>Reserva tu evento y obten un crecimiento academico extra</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="service-inner border-col">
+                    <img src="~/images/service-icon-2.png" class="img-fluid" alt="">
+                    <div class="ser-text">
+                        <h2>Expertos en la materia</h2>
+                        <p>Eventos impartidos por profesionales</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="service-inner border-col">
+                    <img src="~/images/service-icon-3.png" class="img-fluid" alt="">
+                    <div class="ser-text">
+                        <h2>Accesible para docentes y alumnos</h2>
+                        <p>Talleres para mejorar el aprendizaje</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="service-inner special-ser">
+                    <img src="~/images/service-icon-4.png" class="img-fluid" alt="">
+                    <div class="ser-text">
+                        <h2>A la vanguardia cientifica</h2>
+                        <p>Siempre en contexto con lo último en desarrollo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="top-deal" class="top-deal section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-12">
+                <div class="heading color">
+                    @if (ViewBag.Config.Universidad == "Universidad")
+                    {
+                        <h2>Eventos Top</h2>
+                    }
+                    else
+                    {
+                        <h2>Eventos Top</h2>
+                    }
+
+                    <img src="~/images/header-border.png" alt="shap" class="img-fluid">
+                </div>
+            </div>
+        </div>
+        <div class="row top-day-slick">
+            @if (ViewBag.Config.Universidad == "Universidad")
+            {
+                foreach (var item in ViewBag.HotelesTop)
+                {
+                    string strImg = "top-deal-2.jpg";
+                    foreach (var itemchild in item.ImagenesAsociadas)
+                    {
+                        if (itemchild.Imagenes != null && !string.IsNullOrEmpty(itemchild.Imagenes.Imagen))
+                        {
+                            strImg = itemchild.Imagenes.Imagen;
+                            break;
+                        }
+                    }
+                    decimal precio = 0;
+                    decimal precioMaximo = 0;
+                    foreach (var itemchild in item.Habitaciones)
+                    {
+                        if (itemchild.Activo == true)
+                        {
+                            if (itemchild.Costo < precio || precio == 0)
+                                precio = itemchild.Costo;
+                            if (precioMaximo < itemchild.Costo)
+                                precioMaximo = itemchild.Costo;
+                        }
+
+                    }
+                    <div class="col-lg-12 text-left">
+                        <div class="todays-inner">
+                            <div class="today-off">
+                                <img class="img-fluid" src="@Html.Raw(Url.Content("~/ImagesUpload/" + strImg))" alt="@item.Nombre">
+                            </div>
+                            <div class="today-txt">
+                                <h3>
+                                    @item.Nombre
+                                </h3>
+                                <p>
+                                    @item.Direccion @item.Ciudad
+                                </p>
+                                <h5>$ @precio - $ @precioMaximo</h5>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }
+            else
+            {
+                foreach (var item in ViewBag.HabitacionesTop)
+                {
+                    string strImg = "top-deal-2.jpg";
+                    foreach (var itemchild in item.ImagenesAsociadas)
+                    {
+                        if (itemchild.Imagenes != null && !string.IsNullOrEmpty(itemchild.Imagenes.Imagen))
+                        {
+                            strImg = itemchild.Imagenes.Imagen;
+                            break;
+                        }
+                    }
+                    <div class="col-lg-12 text-left">
+                        <div class="todays-inner">
+                            <div class="today-off">
+                                <img class="img-fluid" src="@Html.Raw(Url.Content("~/ImagesUpload/" + strImg))" alt="place">
+                            </div>
+                            <div class="today-txt">
+                                <h3>
+                                    @item.Titulo
+                                </h3>
+                                <h5>@item.Costo</h5>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+
+
+
+        </div>
+
+    </div>
+</section>
+
+<section id="recomended" class="recomended">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-12">
+                <div class="heading color">
+                    @if (ViewBag.Config.Universidad == "Universidad")
+                    {
+                        <h2>Eventos recomendados</h2>
+                    }
+                    else
+                    {
+                        <h2>Eventos recomendados</h2>
+                    }
+                    <img src="~/images/header-border.png" alt="shap" class="img-fluid">
+                </div>
+            </div>
+
+        </div>
+        <div class="row recomended-slick">
+            @if (ViewBag.Config.Universidad == "Universidad")
+            {
+                foreach (var item in ViewBag.HotelesRecomendados)
+                {
+                    string strImg = "recomand-hotel-image-1.jpg";
+                    foreach (var itemchild in item.ImagenesAsociadas)
+                    {
+                        if (itemchild.Imagenes != null && !string.IsNullOrEmpty(itemchild.Imagenes.Imagen))
+                        {
+                            strImg = itemchild.Imagenes.Imagen;
+                            break;
+                        }
+                    }
+                    decimal precio = 0;
+                    decimal precioMaximo = 0;
+                    foreach (var itemchild in item.Habitaciones)
+                    {
+                        if (itemchild.Activo == true)
+                        {
+                            if (itemchild.Costo < precio || precio == 0)
+                                precio = itemchild.Costo;
+                            if (precioMaximo < itemchild.Costo)
+                                precioMaximo = itemchild.Costo;
+                        }
+
+                    }
+                    <div class="col-lg-12 text-left">
+                        <div class="recomand-inner">
+                            <img class="img-fluid" src="@Html.Raw(Url.Content("~/ImagesUpload/" + strImg))" alt="@item.Nombre">
+                            <h3>
+                                @item.Nombre
+                            </h3>
+
+                            <ul>
+                                @for (int i = 0; i < item.Calificacion; i++)
+                                {
+                                    <li><i class="fa fa-star"></i></li>
+                                }
+                            </ul>
+                            <h5>$ @precio - $ @precioMaximo</h5>
+                        </div>
+                    </div>
+
+                }
+
+            }
+            else
+            {
+                foreach (var item in ViewBag.HabitacionesRecomendados)
+                {
+                    string strImg = "recomand-hotel-image-1.jpg";
+                    foreach (var itemchild in item.ImagenesAsociadas)
+                    {
+                        if (itemchild.Imagenes != null && !string.IsNullOrEmpty(itemchild.Imagenes.Imagen))
+                        {
+                            strImg = itemchild.Imagenes.Imagen;
+                            break;
+                        }
+                    }
+
+                    <div class="col-lg-12 text-left">
+                        <div class="recomand-inner">
+                            <img class="img-fluid" src="@Html.Raw(Url.Content("~/ImagesUpload/" + strImg))" alt="@item.Titulo">
+                            <h3>
+                                @item.Titulo
+                            </h3>
+
+                            <ul>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                            </ul>
+                            <h5>$ @item.Costo</h5>
+                        </div>
+                    </div>
+                }
+            }
+
+
+
+
+        </div>
+
+    </div>
+</section>
+
+<section id="news" class="newsletter">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-md-11 news-inner">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="news-text">
+                            <h3>Suscribirme al boletín</h3>
+                            <p>Suscribete a nuestro boletín, para enviarte las mejores ofertas y mantenerte actualizado.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="subscribe-search">
+                            <form id="frmSuscripcionBoletinNews" action="~/Home/Suscribirme" method="post">
+                                <div class="input-group">
+                                    <input type="email" id="destination13" class="field-input" name="txtEmail" value="Escribe tu correo aqui" onfocus="if(this.value  == 'Escribe tu correo aqui') { this.value = ''; } " onblur="if(this.value == '') { this.value = 'Escribe tu correo aqui'; } " />
+                                    <span class="input-group-btn">
+                                        <a class="button-form btnAjaxAdd" data-formulario="#frmSuscripcionBoletinNews">Suscribirme</a>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="artical" class="artical">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-12">
+                <div class="heading color">
+                    <h2>Artículos y noticias</h2>
+                    <img src="~/images/header-border.png" alt="shap" class="img-fluid">
+                </div>
+            </div>
+        </div>
+        <div class="row artical-slick">
+            @foreach (var item in ViewBag.BlogRecientes)
+            {
+                string strImg = string.IsNullOrEmpty(item.Imagen) ? "artical-image-1.jpg" : item.Imagen;
+                <div class="col-md-12">
+                    <div class="artical-inner">
+                        <div class="row">
+                            <div class="col-md-6 artical-img">
+                                <div class="">
+                                    <img src="@Html.Raw(Url.Content("~/FileUpload/" + strImg))" class="img-fluid" alt="@item.Titulo">
+                                </div>
+                            </div>
+                            <div class="col-md-6 border-artical">
+                                <div class="artical-content">
+                                    <h6>@item.FechaModificacion.ToString("dd MMM yyyy")</h6>
+                                    <h2>@item.Titulo</h2>
+                                    <a href="blog-details.html">Más detalle</a>
+                                    <ul>
+                                        <li><i class="fa fa-thumbs-up"></i><span>@item.MeGusta</span></li>
+                                        <li><i class="fa fa-comments"></i><span>@item.Comentarios</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</section>
+
+<section class="get-app section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-12">
+                <div class="heading color">
+                    <h2>Obtener la aplicación</h2>
+                    <p>Descargar ahora</p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center text-center">
+            <div class="col-md-12">
+                <ul class="get-icon">
+                    <li class="apple"><a href="#"><i class="fab fa-apple"></i></a><br><span>iOS</span></li>
+                    <li class="android"><a href="#"><i class="fab fa-android"></i></a><br><span>Android</span></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("#btnBuscarEvento").click(function (event) {
+                event.preventDefault();
+                window.location.href = urlGeneral + "BuscarEvento/?fecha=" + encodeURIComponent($("#datepicker").val()) + "&fecha2=" + encodeURIComponent($("#datepicker1").val()) +
+                    "&catedraticos=" + $("#traveller").val() + "&estudiantes=" + $("#travellernin").val();
+            });
+        });
+    </script>
+}

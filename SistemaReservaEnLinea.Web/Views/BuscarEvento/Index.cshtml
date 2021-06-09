@@ -1,0 +1,169 @@
+﻿@model IEnumerable<SistemaReservaEnLinea.Models.Eventos>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="inner_banner" class="inner_banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="inner-text">
+                    <h2>Eventos</h2>
+                    <div class="inner-link">
+                        <span><a href="~/">Inicio</a></span>
+                        <span>/</span>
+                        <span><a href="#">Eventos</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="tour-package" class="tour tour-other section">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card  mb-3">
+                    <h5 class="card-header" style="border:none; color:#163CB5;padding-top: 1.5rem;">Buscar Eventos</h5>
+                    <div class="card-body">
+                        <div class="row" style="padding-top: 20px;">
+                            <div class="col-md-12 step-where">
+                                <div class="form-group">
+                                    <div class="content-checkin-data">
+                                        <label style="top:-30px">
+                                            <i class="flaticon-door"></i>
+                                            Check in
+                                        </label>
+                                        <input type="text" id="datepicker" data-provide="datepicker" required value="@ViewBag.fecha" class="field-input calendar-input" placeholder="dd/mm/yyyy">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 20px;">
+                            <div class="col-md-12 step-where">
+                                <div class="form-group">
+                                    <div class="content-checkin-data">
+                                        <label style="top:-30px">
+                                            <i class="flaticon-door-1"></i>
+                                            Check out
+                                        </label>
+                                        <input type="text" id="datepicker1" data-provide="datepicker" required value="@ViewBag.fecha2" class="field-input calendar-input" placeholder="dd/mm/yyyy">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 20px;">
+                            <div class="col-md-6 step-where">
+                                <div class="form-group">
+                                    <div class="content-checkin-data">
+                                        <label style="top:-30px">
+                                            <i class="flaticon-tourist"></i>
+                                            Catedráticos
+                                        </label>
+                                        <input type="number" id="traveller" class="field-input" required  value="@ViewBag.catedraticos" min="0" onfocus="if(this.value  == 'Catedraticos') { this.value = ''; } " onblur="if(this.value == '') { this.value = 'Catedraticos'; } " />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 step-where">
+                                <div class="form-group">
+                                    <div class="content-checkin-data">
+                                        <label style="top:-30px">
+                                            <i class="flaticon-tourist"></i>
+                                            Estudiantes
+                                        </label>
+                                        <input type="number" id="travellernin" class="field-input"  value="@ViewBag.estudiantes" min="0" onfocus="if(this.value  == 'Estudiantes') { this.value = ''; } " onblur="if(this.value == '') { this.value = 'Estudiantes'; } " />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="card-text">Información requerida para realizar tu reservación</p>
+                        <a href="#" class="btn banner-btn">Buscar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        var img = item.ImagenesAsociadas.FirstOrDefault() ?? new SistemaReservaEnLinea.Models.ImagenesAsociadas();
+                        img.Imagenes = img.Imagenes ?? new SistemaReservaEnLinea.Models.Imagenes();
+                        string strImg = "";
+                        if (string.IsNullOrEmpty(img.Imagenes.Imagen))
+                        {
+                            strImg = Url.Content("~/images/tour-package-2.jpg");
+                        }
+                        else
+                        {
+                            strImg = Url.Content("~/ImagesUpload/" + img.Imagenes.Imagen);
+                        }
+                        <div class="col-md-12">
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        @*<img src="..." class="card-img" alt="...">*@
+                                        <img src="@strImg" class="card-img img-fluid person" alt="@item.Titulo" style="height:100%">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@item.Titulo</h5>
+                                            <p class="card-text">Sección 2:  @item.Seccion2  Sección 1:  @item.Seccion1</p>
+                                            <p class="card-text">
+                                                <a class="button-form btn-sm  btna font12px" href="~/Reserva/?Id=@item.Id" style="padding: 5px 10px !important;">
+                                                    <i class="flaticon-tourist flaticonmod"></i> Reservar
+                                                </a>
+                                                <a class="btn-sm button-form-secondary btna font12px" href="~/Lugar/?Id=@item.LugarId" style="padding: 5px 10px !important;">
+                                                    <i class="flaticon-hotel flaticonmod" style="font-size:12px;"></i> Lugar
+                                                </a>
+                                                <a class="btn-sm button-form-light btna font12px" href="~/Evento/?Id=@item.Id" style="padding: 5px 10px !important;">
+                                                    <i class="flaticon-suitcase flaticonmod"></i> Evento
+                                                </a>
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</section>
+<style>
+    h5.card-header::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 15%;
+        height: 3px;
+        background: #163CB5;
+        top: 57px;
+    }
+
+    .card {
+        webkit-box-shadow: 1px -2px 30px 3px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: 1px -2px 30px 3px rgba(0, 0, 0, 0.1);
+        box-shadow: 1px -2px 30px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-img {
+        width: 100%;
+        border-radius: calc(.25rem - 1px) 0px 0px calc(.25rem - 1px);
+    }
+
+   .flaticonmod:before, .flaticonmod:before,
+.flaticonmod:after, .flaticonmod:after {   
+        font-size: 16px !important;
+margin-left: 0px !important;
+}
+
+</style>

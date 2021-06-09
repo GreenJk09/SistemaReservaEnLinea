@@ -1,0 +1,586 @@
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .form-hotel .field-destination {
+        width: 305px;
+    }
+    .form-hotel .field-select,
+    .form-hotel .field-date {
+        width: 280px;
+    }
+    .navbar-nav li a {
+        margin: 13px 0px 0px 17px;
+    }
+    #reservation-form .search-opt li:last-child a{
+        padding: 0px 40px;
+    }
+     #reservation-form .search-opt li:first-child a,
+    #reservation-form li a {
+    padding: 0px 44px;
+}
+     .service-inner p {
+        padding-right: 10px;
+        font-size: 12px;
+    }
+    .service-inner h2 {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .service-inner img {
+    padding-right: 7px;
+}
+    .port-text p {
+       padding: 10px 5px;
+            font-size: 14px;
+    }
+    .articalNext,
+    .recomandNext {
+        right: 0px;
+    }
+    .articalprev,
+    .recomandprev {
+        left: 0px;
+    }
+    .todaysprev {
+    left: 0%;
+}
+    .todaysNext {
+    right: 0%;
+}
+    .news-text h3 {
+    font-size: 26px;
+}
+    .border-artical {
+    padding-left: 2px;
+        padding-right: 6px;
+}
+    .subscribe-search .input-group input {
+        width: 71%;
+    }
+    .artical-inner {
+        margin: 36px 7px;
+    }
+    .artical-content h2 {
+        width: auto;
+        font-size: 20px;
+        line-height: 27px;
+        padding-bottom: 15px;
+    }
+    .artical-content h6 {
+        padding: 35px 0 28px
+    }
+    .artical-content ul li {
+        padding-top: 20px;
+    }
+    .get-app span .button-form {
+    font-size: 16px;
+    padding: 10px 18px 9px;
+}
+    .con-inner h2 {
+        font-size: 15px;
+        margin-bottom: 40px;
+    }
+    .footer-ad-txt h3,
+    .footer-ad-txt ul li,
+    .con-inner ul li a {
+        font-size: 14px;
+    }
+    #popular .nav-menu {
+        padding: 5px 14px;
+    }
+    .port_img {
+    width: 18.77%;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+    .border-col{
+        height: 80px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+    .navbar-nav li a {
+        margin: 13px 0px 0px 13px;
+        font-size: 14px;
+    }
+    .banner-text h2 {
+    font-size: 46px;
+}
+    .todaysNext{
+    right: 0%!important;
+}
+    .todaysprev{
+    left: 0%!important;
+}
+    .todays-inner {
+    height: 518px;
+}
+     #reservation-form .search-opt li:last-child a{
+        padding: 0px 31px;
+    }
+     #reservation-form .search-opt li:first-child a,
+    #reservation-form li a {
+    padding: 0px 30px;
+        font-size: 16px;
+}
+    .news-text h3,
+    .news-text p{
+    text-align: center;
+}
+    .step-where{
+        padding: 0 4px;
+    }
+    .content-checkin-data label {
+    font-size: 14px;
+        left: -8px;
+}
+    .content-checkin-data label i {
+    padding-right: 1px;
+}
+    .content-checkin-data input {
+    font-size: 12px!important;
+    padding-left: 4px;
+}
+ .special-ser img {
+    padding-right: 20px;
+    padding-left: 6px;
+}
+    .border-col {
+        border: none;
+    }
+    .button-group button {
+        padding: 5px 17px;
+    }
+    .service {
+    margin-bottom: 20px;
+    margin-top: 60px;
+}
+    .newsletter {
+        padding: 80px 0 60px;
+    }
+    .articalNext,
+    .recomandNext {
+        right: 8px;
+    }
+    .articalprev,
+    .recomandprev {
+        left: 7px;
+    }
+    .artical-inner {
+        margin: 36px 0px;
+    }
+    .artical-content h2 {
+        width: auto;
+        font-size: 14px;
+        line-height: 20px;
+
+    }
+    .artical-content a {
+        font-size: 16px;
+    }
+    .artical-content h6 {
+        padding: 30px 0 25px
+    }
+    .artical-content ul li {
+        padding-top: 10px;
+        padding-right: 7px;
+    }
+    .artical-content ul li i {
+        font-size: 16px;
+    }
+    .artical-img {
+        padding-right: 0;
+    }
+    .share-tog {
+        bottom: 8px;
+    }
+    .con-inner ul li {
+    padding-bottom: 14px;
+}
+    .con-inner {
+    text-align: center;
+}
+    .con-inner:after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+    .footer-ad-txt h3,
+    .footer-ad-txt ul li {
+    font-size: 14px;
+    line-height: 24px;
+}
+    .footer-ad-txt h3,
+    .footer-ad-txt ul {
+    padding-top: 18px;
+}
+    #popular .nav-menu {
+    padding: 5px 13px;
+    font-size: 14px;
+}
+    .port_img {
+        width: 31%;
+    margin-left: 8px;
+    margin-right: 9px;
+}
+    .port-up h4 {
+    font-size: 12px;
+    padding: 6px;
+}
+}
+
+@media only screen and (max-width: 767.98px) {
+    .time-nav{
+        display: block!important;
+        position: absolute;
+        top: 10px;
+    font-size: 19px;
+    left: 12px;
+    }
+    .hidden {
+        display: block;
+    }
+    .more-less {
+        transform: rotate(180deg);
+    }
+    .fa-times,
+.no-nav,
+    .hidden-main {
+        display: none;
+    }
+    .navbar-toggler span {
+        background: #fff;
+    }
+    .header_top {
+        border: none;
+    }
+    #cssmenu #head-mobile {
+    display: none;
+}
+    .mobile a img{
+        width: 74px;
+        padding: 10px 0 10px 10px;
+    }
+    #cssmenu .button {
+    top: 8px;
+    }
+    .support,
+    .language,
+    .currency {
+        display: none!important;
+    }
+    .login a {
+        font-size: 13px!important;
+    }
+    .right_info > ul > li > a {
+        padding: 2px 0;
+    }
+    .login {
+        padding: 6px 9px;
+        margin-top: 5px;
+    }
+    .navbar {
+        padding-bottom: 5px;
+        text-align: center;
+        position: relative;
+        background: transparent;
+        width: 100%;
+        margin-top: -32px;
+    }
+    .navbar-toggler {
+        border: none;
+        padding: 10px 6px;
+        outline: 0 !important;
+        background: #352145;
+    }
+    .header-nav .navbar-nav li a {
+        margin: 10px 0px 10px 0;
+    }
+    .logo img {
+        padding-top: 14px;
+        width: 150px;
+       height: 40px;
+    }
+    .navbar-nav li a {
+        margin: 13px 0px 0px 13px;
+        font-size: 14px;
+        padding-bottom: 9px!important;
+    }
+    .tabs-cat .cate-item a {
+        padding: 0 14px;
+        font-size: 14px;
+    }
+    .form-cn .form-search .form-submit {
+    padding: 7px 0px;
+            background-color: #fac415;
+    width: 100%;
+            margin-top: 12px;
+    text-align: center;
+}
+    .banner-text h2 {
+    font-size: 42px;
+}
+    .banner-text h3 {
+    font-size: 20px;
+}
+    .banner-center {
+    top: 50%;
+    z-index: 99;
+}
+    .reservation .nav-tabs {
+    display: block;
+}
+    #reservation-form li a {
+    border-left: 1px solid #ddd;
+}
+    #reservation-form .search-opt li:first-child a {
+    border-left: 1px solid transparent;
+}
+    .content-checkin-data input {
+    margin: 0 0 40px;
+}
+    .content-checkin-data label {
+    top: -34px;
+    font-size: 16px;
+}
+    .service {
+    margin-bottom: 0;
+}
+    .port-text p {
+    font-size: 14px;
+}
+    .port-up h4 {
+    font-size: 12px;
+    padding: 6px 8px;
+}
+    .service {
+    margin-bottom: 50px;
+}
+    .top-deal{
+        padding-top: 10px;
+    }
+    .slick-slide img {
+    width: 100%;
+}
+    .recomand-inner span {
+    display: -webkit-box;
+    padding-top: 5px;
+}
+    .special-ser img {
+    padding-right: 28px;
+}
+    .border-col {
+        border: none;
+    }
+    .heading h2 {
+        line-height: 40px;
+        font-size: 30px;
+    }
+    .button-group button {
+        padding: 3px 9px;
+        font-size: 14px;
+        margin: 0px 0px 8px;
+    }
+    .shape-2,
+    .shape-1 {
+    border-radius: 0px;
+    }
+    .artical{
+        margin-top: -10px;
+    }
+    .newsletter {
+        padding: 60px 0 50px;
+    }
+    .get-app{
+        padding-top: 0;
+    }
+    .todaysNext,
+    .articalNext,
+    .recomandNext {
+        right: 8px;
+    }
+    .todaysprev,
+    .articalprev,
+    .recomandprev {
+        left: 7px;
+    }
+
+    .artical-inner {
+        margin: 36px 0px;
+            padding: 15px 15px 29px;
+    }
+    .artical-content{
+        text-align: center;
+    }
+    .artical-content h6 {
+    padding: 25px 0 10px;
+}
+    .artical-content h2 {
+    font-size: 20px;
+    width: auto;
+        padding-bottom: 10px;
+}
+    .artical-content ul li {
+    float: unset;
+    display: initial;
+}
+    .artical-content ul {
+    padding-top: 10px;
+}
+    .artical-img img {
+        width: 100%;
+    }
+    .dd {
+        width: 70px!important;
+        left: 1px;
+    }
+    .ddlabel {
+        padding-left: 2px;
+    }
+    .get-app .input-group:after {
+        display: none;
+    }
+    .get-app .subscribe-search .input-group input {
+        width: 63%;
+        padding-left: 60px;
+    }
+    .get-app {
+    padding-bottom: 40px;
+}
+    .share-tog {
+        bottom: 8px;
+    }
+    .con-inner {
+        padding-bottom: 30px;
+    }
+    .con-inner h2 {
+        font-size: 15px;
+        margin-bottom: 30px;
+    }
+    .con-inner ul li a {
+        font-size: 14px;
+    }
+    .con-inner p {
+        font-size: 14px;
+        line-height: 26px;
+        word-spacing: 0;
+    }
+    .contact-part {
+        padding-bottom: 0px;
+    }
+    .footer p {
+        font-size: 11px;
+    }
+    .ui-datepicker {
+        width: auto;
+        padding: 5px;
+    }
+    .get-app .subscribe-search p{
+        text-align: center!important;
+    }
+    .recent-search{
+        text-align: center;
+    display: inline-block;
+        margin-bottom: -2px;
+    margin-top: -5px;
+        width: 100%;
+}
+    .subscribe-search{
+        text-align: center;
+    display: inline-block;
+         width: 100%;
+    }
+
+    .service img{
+        width: auto;
+    }
+    .artical-slick,
+    .top-day-slick{
+        margin-top: -30px;
+    }
+    .popular {
+    margin-top: 0;
+}
+    .news-text h3 {
+    line-height: 26px;
+        font-size: 19px;
+        text-align: center;
+}
+    .news-text p {
+        text-align: center;
+}
+    .todays-inner,
+    .recomand-inner{
+    -webkit-box-shadow: 1px -2px 13px 3px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 1px -2px 13px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px -2px 13px 3px rgba(0, 0, 0, 0.1);
+}
+    #popular .nav-menu {
+    padding: 5px 8px;
+    font-size: 13px;
+    line-height: 34px;
+}
+    .port_img {
+    width: 48%;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+    .border-col{
+        height: auto;
+        margin-top: 0px;
+            margin-bottom: 35px;
+            
+    }
+    .service-inner{
+        margin-left: 50%;
+    transform: translateX(-50%);
+            width: 268px;
+    }
+    .special-ser {
+     margin-top: 0px; 
+}
+      .port_img {
+    width: 48.8%;
+}
+    .news-inner {
+    padding: 28px 20px;
+    border-radius: 0px;
+    margin-left: 8px;
+    margin-right: 8px;
+    }
+    .get-app .input-group input {
+    padding-left: 58px;
+}
+    .subscribe-search span .button-form {
+    padding: 11px 8px;
+}
+    .get-app span .button-form{
+            padding: 9px 9px 9px;
+        top: 27px;
+    }
+    .recent-search span .button-form {
+    padding: 12px 18px 13px;
+}
+     .today-txt {
+    text-align: center;
+}
+    .recomand-inner h5 span {
+    text-align: center;
+    display: inline-block;
+}
+}
+
+@media (min-width: 320px) and (max-width: 420px){
+    .port_img {
+    width: 100%;
+}
+    .banner-text h2 {
+    font-size: 34px;
+}
+    .banner-text h3 {
+    font-size: 18px;
+}
+    .heading h2 {
+    font-size: 26px;
+}
+   
+}

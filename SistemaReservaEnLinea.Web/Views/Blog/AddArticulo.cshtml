@@ -1,0 +1,147 @@
+﻿@model SistemaReservaEnLinea.Models.Blog
+@{
+    ViewData["Title"] = "Agregar artículo";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+
+<div class="account-settings-container layout-top-spacing">
+    <div class="account-content">
+        <div class="scrollspy-example" data-spy="scroll" data-target="#account-settings-scroll" data-offset="-100">
+            <form id="addArticulo" class="section general-info" action="~/Blog/AddArticulo" method="post"  enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
+                        <div class="section general-info">
+                            <div class="info">
+                                <h6 class="">Información del artículo</h6>
+                                <div class="row">
+                                    <div class="col-lg-11 mx-auto">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <input type="hidden" name="Id" id="txtId" value="@Model.Id" />
+                                                    <label for="txtTitulo">Título</label>
+                                                    <input type="text" class="form-control mb-4" name="Titulo" id="txtTitulo" required placeholder="Título del artículo" value="@Model.Titulo">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <div class="form-group">
+                                                    <label for="txtDescripcion">Descripción</label>
+                                                    <textarea class="form-control mb-4" name="Descripcion" id="txtDescripcion">@Model.Descripcion</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txtTags">Tags (separados por comas)</label>
+                                                    <input type="text" class="form-control mb-4" id="txtTags" name="Tags" required value="@Model.Tags">
+                                                </div>
+                                            </div>
+
+                                            
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="txtMetaKeys">MetaKeys (separados por comas)</label>
+                                                            <input type="text" class="form-control mb-4" id="txtMetaKeys" name="MetaKeys" required value="@Model.MetaKeys">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="drpTipo">Tipo</label>
+                                                            <select class="form-control" name="Tipo" id="drpTipo">
+                                                                <option>Video</option>
+                                                                <option selected>Artículo</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="txtCategoria">Categoría</label>
+                                                            <input type="text" class="form-control mb-4" name="Categoria" id="txtCategoria" required value="@Model.Categoria">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="txtVideo">Video</label>
+                                                            <input type="text" class="form-control mb-4" id="txtVideo" name="Video" value="@Model.Video">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="upload mt-4 pr-md-4">
+                                                            <input type="file" id="input-file-max-fs" name="Imagen" class="dropify" data-allowed-file-extensions="png jpg jpeg gif bmp"
+                                                                   data-default-file="@Url.Content("~/FileUpload/" + Model.Imagen)" data-max-file-size="2M" />
+                                                            <p class="mt-2"><i class="flaticon-cloud-upload mr-1"></i> Seleccionar imagen</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="txtPost">Cuerpo del artículo</label>
+                                                    <textarea class="form-control mb-4" name="Post" id="txtPost">@Model.Descripcion</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="account-settings-footer">
+
+        <div class="as-footer-container">
+            <button id="multiple-reset" class="btn btn-warning" style="padding: 0px;margin: 0px;border: 0px;"></button>
+            <button id="multiple-messages" class="btn btn-primary btnAjaxAdd" data-formulario="#addArticulo">Guardar información  </button>
+
+        </div>
+
+    </div>
+</div>
+@section styles{
+    <link href="@ViewBag.Color/assets/css/users/account-setting.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="@ViewBag.Color/plugins/editors/markdown/simplemde.min.css">
+    <link href="@ViewBag.Color/plugins/lightbox/photoswipe.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.Color/plugins/lightbox/default-skin/default-skin.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.Color/plugins/lightbox/custom-photswipe.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.Color/assets/css/components/cards/card.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        .btnSelectImagen {
+            position: absolute;
+            top: 10px;
+            right: -5px;
+        }
+    </style>
+}
+@section scripts{
+    <script src="@ViewBag.Color/plugins/lightbox/photoswipe.min.js"></script>
+    <script src="@ViewBag.Color/plugins/lightbox/photoswipe-ui-default.min.js"></script>
+    <script src="@ViewBag.Color/plugins/lightbox/custom-photswipe.js"></script>
+    <script src="@ViewBag.Color/assets/js/users/account-settings.js"></script>
+    <script src="~/admin/black/plugins/editors/ckeditor/ckeditor.js"></script>
+    <script>
+        $(document).ready(function () {
+            const config = {
+                language: 'es',
+                format_tags: 'p;h1;h2;h3;h5;h4;h6;pre'
+            };
+            const editor = document.getElementById("txtPost");
+            CKEDITOR.replace(editor, config);
+        });
+    </script>
+}

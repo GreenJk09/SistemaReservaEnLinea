@@ -1,0 +1,132 @@
+﻿@model SistemaReservaEnLinea.Models.Configuracion
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+
+<div class="account-settings-container layout-top-spacing">
+    <div class="account-content">
+        <div class="scrollspy-example" data-spy="scroll" data-target="#account-settings-scroll" data-offset="-100">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
+                    <form id="general-info" class="section general-info" action="~/Configuracion/GuardarInformacion" method="post" enctype="multipart/form-data">
+                        <div class="info">
+                            <h6 class="">Configuración del sitio web público</h6>
+                            <div class="row">
+                                <div class="col-lg-11 mx-auto">
+                                    <div class="row">
+                                        <div class="col-xl-2 col-lg-12 col-md-4">
+                                            <div class="upload mt-4 pr-md-4">
+                                                <input type="file" id="input-file-max-fs" name="LogoPrincipal" class="dropify" data-allowed-file-extensions="png jpg jpeg gif bmp"
+                                                       data-default-file="@Url.Content("~/FileUpload/" + Model.LogoPrincipal)" data-max-file-size="2M" />
+                                                <p class="mt-2"><i class="flaticon-cloud-upload mr-1"></i> Seleccionar logo principal</p>
+                                            </div>
+                                            <div class="upload mt-4 pr-md-4">
+                                                <input type="file" id="input-file-max-fs" name="LogoFooter" class="dropify" data-allowed-file-extensions="png jpg jpeg gif bmp"
+                                                       data-default-file="@Url.Content("~/FileUpload/" + Model.LogoFooter)" data-max-file-size="2M" />
+                                                <p class="mt-2"><i class="flaticon-cloud-upload mr-1"></i> Seleccionar logo footer</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-10 col-lg-12 col-md-8 mt-md-0 mt-4">
+                                            <div class="form">
+                                                <div class="row">
+                                                    <div class="col-sm-8">
+                                                        <div class="form-group">
+                                                            <label for="Direccion">Dirección</label>
+                                                            <input type="text" class="form-control mb-4" name="Direccion" id="Direccion" required placeholder="Dirección completa" value="@Model.Direccion">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        @{
+                                                            string cheked = "";
+                                                            cheked = string.IsNullOrEmpty(Model.Universidad) || Model.Universidad == "Universidad" ? "checked" : "";
+                                                        }
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" id="AgenciaHotel1" name="AgenciaHotel" class="custom-control-input" @cheked value="Agencia">
+                                                            <label class="custom-control-label" for="AgenciaHotel1">Universidad</label>
+                                                        </div>
+                                                        @{
+                                                             cheked = "";
+                                                            cheked = string.IsNullOrEmpty(cheked) && Model.Universidad == "Universidad" ? "checked" : "";
+                                                        }
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" id="AgenciaHotel2" name="AgenciaHotel" class="custom-control-input" @cheked value="Hotel">
+                                                            <label class="custom-control-label" for="AgenciaHotel2">Facultad</label>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="Telefono">Teléfono</label>
+                                                            <input type="text" class="form-control mb-4" id="Telefono" name="Telefono" placeholder="Télefono" required value="@Model.Telefono">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="Twitter">Twitter</label>
+                                                            <input type="text" class="form-control mb-4" name="Twitter" id="Twitter" placeholder="Twitter" value="@Model.Twitter">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="Facebook">Facebook</label>
+                                                            <input type="text" class="form-control mb-4" name="Facebook" id="Facebook"
+                                                                   placeholder="Facebook" value="@Model.Facebook">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="PaginaWeb">Página Web</label>
+                                                            <input type="text" class="form-control mb-4" name="PaginaWeb" id="PaginaWeb"
+                                                                   placeholder="Web" value="@Model.PaginaWeb">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="Instagram">Instagram</label>
+                                                            <input type="text" class="form-control mb-4" name="Instagram" id="Instagram"
+                                                                   placeholder="Instagram" value="@Model.Instagram">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="Linkedin">Linkedin</label>
+                                                            <input type="text" class="form-control mb-4" name="Linkedin" id="Linkedin"
+                                                                   placeholder="Linkedin" value="@Model.Linkedin">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="account-settings-footer">
+
+        <div class="as-footer-container">
+            <button id="multiple-reset" class="btn btn-warning" style="padding: 0px;margin: 0px;border: 0px;"></button>
+            @*<div class="blockui-growl-message">
+                    <i class="flaticon-double-check"></i>&nbsp; Settings Saved Successfully
+                </div>*@
+            <button id="multiple-messages" class="btn btn-primary btnAjaxAdd" data-formulario="#general-info">Guardar información  </button>
+
+        </div>
+
+    </div>
+</div>
+@section styles{
+    <link href="@ViewBag.Color/assets/css/users/account-setting.css" rel="stylesheet" type="text/css" />
+}
+@section scripts{
+    <script src="@ViewBag.Color/assets/js/users/account-settings.js"></script>
+}

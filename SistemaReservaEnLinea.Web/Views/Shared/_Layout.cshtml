@@ -1,0 +1,434 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor  accessor;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Reserva en Línea</title>
+    <meta name="description" content="">
+    <!---Font Icon-->
+    <link href="~/css/all.min.css" rel="stylesheet">
+    <link href="~/font/flaticon.css" rel="stylesheet">
+    <!-- / -->
+    <!-- Plugin CSS -->
+    <link rel="shortcut icon" type="image/png" href="~/images/favicon.ico" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/slick.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/dd.css">
+    <link rel="stylesheet" href="~/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/css/menu.css">
+    <!-- Theme Style -->
+    <link href="~/css/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/css/style-2.css" rel="stylesheet">
+    <link href="~/css/responsive-2.css" rel="stylesheet">
+    <link href="~/css/custom.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="preloader">
+        <div id="loading-center">
+            <img src="~/images/white.gif" alt="">
+        </div>
+    </div>
+    <a href="#" id="back-top-btn">
+        <i class="fas fa-angle-double-up"></i>
+    </a>
+    <section id="header" class="header_area sticky-top">
+        <!-- Header nav AREA CSS -->
+        <!--Header Top-->
+
+        <div class="container hidden-main">
+            <div class="row">
+                <div class="col-md-2 logo">
+                    @{ 
+                        string strLogo = "~/images/header-logo-2.png";
+                        if(ViewBag.Config.LogoPrincipal!=null || !string.IsNullOrEmpty(ViewBag.Config.LogoPrincipal))
+                        {
+                            strLogo = "~/FileUpload/" + ViewBag.Config.LogoPrincipal;
+                        }
+                    }
+                    <img src="@Url.Content(strLogo)" alt="" class="img-fluid">
+                </div>
+                <div class="col-md-10 text-right">
+                    <div class="row justify-content-end d-flex">
+                        <div class="col-md-9">
+
+                            <div class="header_top custom_nav right_info text-right">
+                                @*<ul>
+                                        <li class="support"><a href="#">Ayuda</a></li>
+                                        <li class="login">
+                                            <a href="#">Regigistro / Acceso</a>
+                                        </li>
+                                    </ul>*@
+                            </div>
+
+                        </div>
+                        <div class="col-md-12" style="padding-top:30px;">
+                            <nav id="nav-part" class="navbar header-nav other-nav navbar-expand-md">
+                                <div class="container">
+
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </button>
+                                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                                        <ul class="navbar-nav">
+                                            @{
+                                                string activo = ViewBag.Page == "Home" ? "active" : "";
+                                            }
+                                            <li class="nav-item"><a class="nav-link @Html.Raw(activo)" href="~/">Inicio</a></li>
+                                            @{
+                                                activo = ViewBag.Page == "Lugares" || ViewBag.Page == "Eventos" ? "active" : "";
+                                            }
+                                            <li class="nav-item"><a class="nav-link @Html.Raw(activo)" href="~/BuscarEvento">Eventos</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="#recomended">Actividades</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="#popular">Blog</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+                                            @if (!accessor.HttpContext.User.Identity.IsAuthenticated)
+                                            {
+                                                <li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li class="nav-item"><a class="nav-link" href="~/Panel">Panel de control</a></li>
+
+                                            }
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav id='cssmenu' class="hidden mobile">
+            <div>
+                <a href="index.html">
+                    <img src="~/images/header-logo-2.png" class="img-fluid" alt="">
+                </a>
+            </div>
+            <div id="head-mobile"></div>
+            <div class="button tog-nav">
+                <i class="more-less fa fa-align-right"></i>
+
+            </div>
+
+            <ul>
+                <li class="nav-item"><a class="nav-link active" href="#banner">Inicio</a></li>
+                <li><a href="#top-deal">Lugares</a></li>
+                <li><a href="#recomended">Actividades</a></li>
+                <li><a href="#popular">Blog</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </section>
+    @RenderBody()
+
+    <input id="txtIp" name="ip" type="hidden" style="margin-bottom:0px" value="@accessor.HttpContext.Connection.RemoteIpAddress.ToString()">
+    <footer id="contact" class="contact">
+        <div class="container">
+            <div class="row contact-part">
+                <div class="col-lg-4 col-md-6 col-6">
+                    <div class="footer-add">
+                        @{
+                            strLogo = "~/images/footer-logo.png";
+                            if (ViewBag.Config.LogoFooter != null || !string.IsNullOrEmpty(ViewBag.Config.LogoFooter))
+                            {
+                                strLogo = "~/FileUpload/" + ViewBag.Config.LogoFooter;
+                            }
+                        }
+                        <img src="@Url.Content(strLogo)" alt="" class="img-fluid">
+                        <div class="row footer-ad-txt">
+                            <div class="col-lg-4 col-md-4 col-5">
+                                <h3>Dirección :</h3>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-7">
+                                <ul>
+                                    <li>@ViewBag.Config.Direccion</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row footer-ad-txt">
+                            <div class="col-4">
+                                <h3>Teléfono :</h3>
+                            </div>
+                            <div class="col-8">
+                                <ul>
+                                    <li>@ViewBag.Config.Telefono</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row footer-ad-txt">
+                            <div class="col-4">
+                                <h3>Website	:</h3>
+                            </div>
+                            <div class="col-8">
+                                <ul>
+                                    <li>@ViewBag.Config.PaginaWeb</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-6">
+                    <div class="con-inner">
+                        <h2>Ayuda y Soporte</h2>
+                        <ul>
+                            <li><a href="#">Contactáctanos</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Privacidad</a></li>
+                            <li><a href="#">Cookies</a></li>
+                            <li><a href="~/Post/5">Terminos</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-4">
+                    <div class="con-inner">
+                        <h2>Búsquedas</h2>
+                        <ul>
+                            <li><a href="#">País</a></li>
+                            <li><a href="#">Ciudad</a></li>
+                            <li><a href="#">Localidad</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-4">
+                    <div class="con-inner">
+                        <h2>Siguenos en</h2>
+                        <ul>
+                            <li><a href="@ViewBag.Config.Facebook"><i class="fab fa-facebook-f"></i>Facebook</a></li>
+                            <li><a href="@ViewBag.Config.Twitter"><i class="fab fa-twitter"></i>Twitter</a></li>
+                            <li><a href="@ViewBag.Config.Instagram"><i class="fab fa-instagram"></i>Instagram</a></li>
+                            <li><a href="@ViewBag.Config.Linkedin"><i class="fab fa-linkedin"></i>Linkedin</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="footer">
+                        <p>Copyright © 2020. All rights reserved by Programación III</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- jQuery -->
+    @*<div class="modal fade in" id="login" role="dialog" style="display: block; padding-right: 17px;">
+            <div class="modal-dialog">
+                <div class="login-content">
+                    <div class="login-image">
+                        <img src="images/logo-black.png" alt="image">
+                    </div>
+                    <h3>Hello!Sign into your account</h3>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" placeholder="Enter email address">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Enter password">
+                        </div>
+                        <div class="form-group form-checkbox">
+                            <input type="checkbox"> Remember Me
+                            <a href="#">Forgot password?</a>
+                        </div>
+                    </form>
+                    <div class="form-btn">
+                        <a href="#" class="btn btn-orange">LOGIN</a>
+                        <p>Need an Account?<a href="#"> Create your Hotux account</a></p>
+                    </div>
+                    <ul class="social-links">
+                        <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>*@
+
+    <div class="modal" tabindex="-1" role="dialog" id="loginModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="login-image">
+                        <img src="~/images/header-logo-2.png" alt="" class="img-fluid">
+                    </div>
+                    <form id="formLogin" action="~/Account/Login/?ReturnUrl=@ViewData["ReturnUrl"]" method="post">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="heading color" style="text-align:center">
+                                    <h2 style="font-size: 20px;text-transform:uppercase">Hola, bienvenido a Reserva En Línea</h2>
+                                    <img src="/images/header-border.png" alt="shap" class="img-fluid">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="txtEmail" class="text-gris">Correo electrónico</label>
+                                    <input type="email" class="form-control" id="txtEmail" name="Email" required placeholder="Correo electrónico">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="txtPassword" class="text-gris">Contraseña</label>
+                                    <input type="password" class="form-control" id="txtPassword" name="Password" required placeholder="Contraseña">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="chkRemember">
+                                            <label class="form-check-label text-gris" for="chkRemember">Recordar mi cuenta</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="text-azul" id="linkVamosRecuperar">Recuperar tu contraseña</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-12" style="text-align:center;">
+                                <button type="submit" class="btn btn-primary button-form btnAjaxAdd" data-formulario="#formLogin">Entrar a Reserva Línea</button>
+                            </div>
+                            <div class="col-lg-12" style="text-align: center;padding: 30px 0 0 0;">
+                                <div class="form-group">
+                                    <label class="text-azul" style="cursor:pointer;" id="linkRegistrate">Registrate aquí</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form id="formRecupera" action="~/Account/RecuperarPass" method="post" style="display:none">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="heading color" style="text-align:center">
+                                    <h2 style="font-size: 20px;text-transform:uppercase">Recuperar contraseña de Reserva en Línea</h2>
+                                    <img src="/images/header-border.png" alt="shap" class="img-fluid">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="txtEmail" class="text-gris">Correo electrónico</label>
+                                    <input type="email" class="form-control" id="txtEmail" name="Email" required placeholder="Correo electrónico">
+                                </div>
+                            </div>
+                            <div class="col-lg-12" style="text-align:center;">
+                                <button type="submit" class="btn btn-primary button-form btnAjaxAdd" data-formulario="#formRecupera">Recuperar contraseña</button>
+                            </div>
+                            <div class="col-lg-12" style="text-align: center;padding: 30px 0 0 0;">
+                                <div class="form-group">
+                                    <label class="text-azul" style="cursor:pointer;" id="linkRecuperar">Entrar a la Reserva en Línea</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form id="formRegister" action="~/Account/Register" method="post" style="display:none;">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="heading color" style="text-align:center">
+                                    <h2 style="font-size: 20px;text-transform:uppercase">Registro</h2>
+                                    <img src="/images/header-border.png" alt="shap" class="img-fluid">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="txtName" class="text-gris">Nombre</label>
+                                    <input type="text" class="form-control" id="txtName" name="Nombre" required placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="txtEmail" class="text-gris">Correo electrónico</label>
+                                    <input type="email" class="form-control" id="txtEmail" name="Email" required placeholder="Correo electrónico">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="txtPassword" class="text-gris">Contraseña</label>
+                                    <input type="password" class="form-control" id="txtPassword" name="Password" required placeholder="Contraseña">
+                                </div>
+                            </div>
+                            <div class="col-lg-12" style="text-align:center;">
+                                <button type="submit" class="btn btn-primary button-form btnAjaxAdd" data-formulario="#formRegister">Registrarme en Reserva en Línea</button>
+                            </div>
+                            <div class="col-lg-12" style="text-align: center;padding: 30px 0 0 0;">
+                                <div class="form-group">
+                                    <label class="text-azul" style="cursor:pointer;" id="linkEntrar">Entrar a Reserva en Línea</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var urlGeneral = '@Url.Content("~/")';
+        var urlLoading = '@Url.Content("~/admin/white/plugins/lightbox/default-skin/preloader.gif")'
+    </script>
+
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script src="~/js/jquery-migrate-3.0.0.min.js"></script>
+    <script src="~/js/sweetalert2.all.min.js"></script>
+    <script src="~/js/jquery.form.js"></script>
+    <!-- Plugins -->
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/isotope.pkgd.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/menu-opener.js"></script>
+    <script src="~/js/slick.min.js"></script>
+    <script src="~/js/waypoints.js"></script>
+    <script src="~/js/jquery.counterup.min.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/jquery.dd.min.js"></script>
+    <script src="~/js/Carousel.js"></script>
+    <script src="~/js/SmoothScroll.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <!-- custom -->
+
+    <script src="~/js/custom.js"></script>
+    <script src="~/js/customewg.js"></script>
+    <script src="~/js/menu.js"></script>
+    @RenderSection("Scripts", required: false)
+    @if (ViewData["ReturnUrl"] != null)
+    {
+        string loginShow = "<script>$(\"#loginModal\").modal(\"show\");</script>";
+        @Html.Raw(loginShow)
+    }
+    <script>
+
+        $("#linkRegistrate").click(function () {
+            $("#formLogin").hide();
+            $("#formRegister").show();
+
+        })
+        $("#linkEntrar").click(function () {
+            $("#formLogin").show();
+            $("#formRegister").hide();
+        })
+        $("#linkRecuperar").click(function () {
+            $("#formRecupera").hide();
+            $("#formLogin").show();
+        })
+
+        $("#linkVamosRecuperar").click(function () {
+            $("#formRecupera").show();
+            $("#formLogin").hide();
+        })
+
+    </script>
+</body>
+</html>

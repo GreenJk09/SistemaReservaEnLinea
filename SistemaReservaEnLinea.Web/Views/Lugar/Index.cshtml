@@ -1,0 +1,270 @@
+﻿@model SistemaReservaEnLinea.Models.Lugar
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string twitt = "https://twitter.com/share?text=" + Model.Nombre + "&url=" + ViewBag.Url;
+    string face = "https://www.facebook.com/sharer/sharer.php?u=" + ViewBag.Url + "&t=" + Model.Nombre;
+    string linke = "https://www.linkedin.com/shareArticle?mini=true&url=" + ViewBag.Url + "&title=" + Model.Nombre;
+}
+<!--================================================
+                      Inner BANNER PART START
+   ==================================================-->
+<section id="inner_banner" class="inner_banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="inner-text">
+                    <h2>@Model.Nombre</h2>
+                    <div class="inner-link">
+                        <span><a href="~/">Inicio</a></span>
+                        <span>/</span>
+                        <span><a href="~/BuscarEvento">@Model.Nombre</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="blog-details"
+         class="blue-color details-blog details-line section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        @{
+                            int cont = 0;
+                            foreach (var item in Model.ImagenesAsociadas)
+                            {
+                                string strActivo = cont == 0 ? "active" : "";
+                                <li data-target="#carouselExampleCaptions" data-slide-to="@cont" class="@strActivo"></li>
+                                cont += 1;
+                            }
+                        }
+                    </ol>
+                    <div class="carousel-inner">
+                        @{
+                            cont = 0;
+                            foreach (var item in Model.ImagenesAsociadas)
+                            {
+                                string strActivo = cont == 0 ? "active" : "";
+                                string strImg = Url.Content("~/ImagesUpload/" + item.Imagenes.Imagen);
+                                <div class="carousel-item @strActivo">
+                                    <img src="@strImg" class="d-block w-100" alt="@Model.Nombre">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>@Model.Nombre</h5>
+                                    </div>
+                                </div>
+                                cont += 1;
+                            }
+                        }
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previo</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Siguiente</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 blog-detail-inner">
+                @Html.Raw(Model.Descripcion)
+            </div>
+        </div>
+
+
+        <!-- sidebar tag start -->
+        <div class="row">
+            @*<div class="col-md-12">
+                    <div class="tag">
+                        <h2>tags:</h2>
+                        <a href="#">blog</a>
+                        <a href="#">blog details</a>
+                        <a href="#">single blog</a>
+                        <a href="#">details</a>
+                        <a href="#">describe</a>
+                        <a href="#">full view</a>
+                        <a href="#">corporate</a>
+                        <a href="#">business</a>
+                    </div>
+                </div>*@
+            <div class="col-md-12">
+                <div class="share">
+                    <h2>Compartir:</h2>
+                    <ul>
+                        <li>
+                            <a href="@face" target="_blank" onclick="window.open(this.href, 'newwindow', 'width=700, height=350'); return false;"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li>
+                            <a href="@twitt" target="_blank" onclick="window.open(this.href, 'newwindow', 'width=700, height=350'); return false;"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="@linke" target="_blank" onclick="window.open(this.href, 'newwindow', 'width=700, height=350'); return false;"><i class="fab fa-linkedin-in"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- sidebar tag  end -->
+
+        <div class="row" style="margin:20px 0px ">
+            <div class="col-md-12">
+                <div class="row">
+                    @foreach (var item in Model.Evento.Where(c => c.Activo == true))
+                    {
+                        var img = item.ImagenesAsociadas.FirstOrDefault() ?? new SistemaReservaEnLinea.Models.ImagenesAsociadas();
+                        img.Imagenes = img.Imagenes ?? new SistemaReservaEnLinea.Models.Imagenes();
+                        string strImg = "";
+                        if (string.IsNullOrEmpty(img.Imagenes.Imagen))
+                        {
+                            strImg = Url.Content("~/images/tour-package-2.jpg");
+                        }
+                        else
+                        {
+                            strImg = Url.Content("~/ImagesUpload/" + img.Imagenes.Imagen);
+                        }
+                        <div class="col-md-3">
+                            <div class="card">
+                                <img src="@strImg" class="card-img-top" alt="@item.Titulo">
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.Titulo</h5>
+                                    <p class="card-text">
+                                        Sección 2: @item.Seccion2 Sección 1: @item.Seccion1
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+
+                                    <a class="button-form btn-sm  btna font12px" style="padding: 5px 10px !important;display: block;">
+                                        <i class="flaticon-tourist flaticonmod"></i> Reservar
+                                    </a>
+                                    <a class="btn-sm button-form-secondary btna font12px" href="~/Habitacion/?Id=@item.Id" style="padding: 5px 10px !important;display: block;margin-top:5px">
+                                        <i class="flaticon-suitcase flaticonmod"></i> Evento
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="blue-color details-blog comments-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <h4>@Model.Comentarios.Count() Comentarios</h4>
+            </div>
+            <div class="col-md-6 d-sm-none d-none d-md-block text-left">
+                <h4>Deja un comentario</h4>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="blue-color details-blog comments" style="margin-bottom:40px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 comments-details">
+                <div class="row">
+                    <div id="blogcomentarios" class="blog_comments">
+                        @{
+                            cont = 0;
+                            foreach (var item in Model.Comentarios.Where(c => c.ParentId == null))
+                            {
+                                string primera = cont == 0 ? "media_first" : "";
+                                string nombre = "comentario" + item.Id.ToString();
+                                <div id="@nombre" class="media @primera media-middle">
+                                    <div class="media-left">
+                                        <img src="~/images/blog-comment-3.jpg"
+                                             class="img-fluid"
+                                             alt="media-img" />
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="media">
+                                            <div class="media-body blog_media">
+                                                <h3 class="media-heading">
+                                                    @item.Nombre <span>Posted on: @item.Fecha.ToString("dd MMM yyyy")</span>
+                                                </h3>
+                                                <p>
+                                                    @item.Comentario
+                                                </p>
+                                                <a class="respondermensaje" href="#" data-responderid="@item.Id">
+                                                    <i class="fa fa-reply-all" aria-hidden="true"></i> Responder
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- Nested media object -->
+                                        @Html.Raw(SistemaReservaEnLinea.Tools.Comentarios.GetComentarios(item.Id, "Hotel", Model.Comentarios.ToList(), Url.Content("~/images/blog-comment-2.jpg")))
+                                    </div>
+                                </div>
+                                cont += 1;
+                            }
+
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <form id="formNewCommentAdd" action="~/Lugar/EnviarComentaio/" method="post">
+                    <div class="comments-title d-md-none d-lg-none">
+                        <h4>Deja un comentario</h4>
+                    </div>
+                    <div class="row form-detail blogdetails_form">
+
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Nombre" required placeholder="Nombre" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <input type="email"
+                                       class="form-control"
+                                       placeholder="E-mail" name="email" required />
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <div class="form-group">
+                                <textarea name="mensaje"
+                                          placeholder="Mensaje" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <div class="blog_grid_btn">
+                                <button type="submit" class="bro-btn2 btnAjaxAdd" data-formulario="#formNewCommentAdd">Enviar</button>
+                            </div>
+                        </div>
+                        <input type="hidden" name="PadreId" id="txtPadreId" />
+                        <input type="hidden" name="HotelId" value="@Model.Id" />
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==============================
+         Blog Details End
+ ==================================== -->
+<!-- =============================
+        Start: News Letter
+    ============================= -->
+<!-- =============================
+    End: News Letter
+============================= -->
+@section scripts{
+    <script>
+        $(".respondermensaje").click(function (event) {
+            event.preventDefault();
+            $("#txtPadreId").val($(this).data("responderid"))
+        });
+    </script>
+}

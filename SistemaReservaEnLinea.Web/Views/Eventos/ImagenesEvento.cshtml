@@ -1,0 +1,13 @@
+﻿@model IEnumerable<SistemaReservaEnLinea.Models.ImagenesAsociadas>
+@foreach (var item in Model)
+{
+    string strImg = Url.Content("~/ImagesUpload/" + item.Imagenes.Imagen);
+
+    <div class="card component-card_2" style="margin-bottom:20px">
+        <img src="@strImg" class="card-img-top" alt="@item.Imagenes.Nombre">
+        <div class="card-body">
+            <h5 class="card-title">@item.Imagenes.Nombre</h5>
+            <a href="#" class="btn btn-primary" onclick="eliminarrelacionimagen(@item.Id, event)">Eliminar</a>
+        </div>
+    </div>
+}

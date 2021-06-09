@@ -1,0 +1,578 @@
+﻿@model SistemaReservaEnLinea.Models.Eventos
+@{
+    ViewData["Title"] = "Agregar Eventos";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<div class="account-settings-container layout-top-spacing">
+    <div class="account-content">
+        <div class="scrollspy-example" data-spy="scroll" data-target="#account-settings-scroll" data-offset="-100">
+            <form id="AddEvento" class="section general-info needs-validation simple-example" action="~/Eventos/AddEvento" method="post">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
+                        <div class="section general-info">
+                            <div class="info">
+                                <h6 class="">Información general de los Eventos</h6>
+                                <div class="row">
+                                    <div class="col-lg-11 mx-auto">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="txtNombre">Seleccione el lugar</label>
+                                                    <select name="LugarId" id="drpSelectLugarId" class="form-control mb-4">
+                                                        @if (ViewBag.Lugares != null)
+                                                        {
+                                                            foreach (var item in ViewBag.Lugares)
+                                                            {
+                                                                if (item.Id == Model.LugarId)
+                                                                {
+                                                                    <option selected value="@item.Id">@item.Nombre</option>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <option value="@item.Id">@item.Nombre</option>
+                                                                }
+                                                            }
+                                                        }
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        Seleccione una opción
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <input type="hidden" name="Id" id="txtId" value="@Model.Id" />
+                                                    <label for="txtNombre">Título del Evento</label>
+                                                    <input type="text" class="form-control mb-4" name="Titulo" id="txtTitulo" required  value="@Model.Titulo">
+                                                    <div class="invalid-feedback">
+                                                        Nombre del Evento
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtTelefono">Costo de Evento</label>
+                                                    <input type="number" class="form-control mb-4" id="txtCosto" name="Costo" min="1" step="0.10" placeholder="100.00" required value="@Model.Costo">
+                                                    <div class="invalid-feedback">
+                                                        El costo por evento debe ser mayor o igual a 1
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtTotalHabitaciones">Total de Eventos de esta categoría</label>
+                                                    <input type="number" class="form-control mb-4" id="txtTotalHabitaciones" name="TotalHabitaciones" min="0" required placeholder="1" value="@Model.TotalEventos">
+                                                    <div class="invalid-feedback">
+                                                        El total de eventos de esta categoría mayor o igual a 1
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="txtDescripcion">Descripción</label>
+                                                    <textarea class="form-control mb-4" name="Descripcion" id="txtDescripcionSendHotel" required>@Model.Descripcion</textarea>
+                                                    <div class="invalid-feedback">
+                                                        Debe ingresar descripción
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
+                        <div class="section contact">
+                            <div class="info">
+                                <h5 class="">Personas en evento</h5>
+                                <div class="row">
+                                    <div class="col-md-11 mx-auto">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txtAdultos">Catedráticos</label>
+                                                    <input type="number" class="form-control mb-4" name="Adultos" id="txtAdultos" required value="@Model.Catedraticos">
+                                                    <div class="invalid-feedback">
+                                                        Capture el número de docentes permitidos
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txtNinos">Estudiantes</label>
+                                                    <input type="number" class="form-control mb-4" id="txtNinos" name="Ninos" required placeholder="1" value="@Model.Estudiantes">
+                                                    <div class="invalid-feedback">
+                                                        Capture el número de estudiantes permitidos
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txtInfantes">Invitados</label>
+                                                    <input type="number" class="form-control mb-4" id="txtInfantes" name="Infantes" required placeholder="1" value="@Model.Invitados">
+                                                    <div class="invalid-feedback">
+                                                        Capture los invitados permitidos
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
+                        <div class="section contact">
+                            <div class="info">
+                                <h5 class="">Máximo personas en el evento</h5>
+                                <div class="row">
+                                    <div class="col-md-11 mx-auto">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txtMaximoAdultos">Máximo catedraticos</label>
+                                                    <input type="number" class="form-control mb-4" name="MaximoAdultos" id="txtMaximoAdultos" required value="@Model.MaximoCatedraticos">
+                                                    <div class="invalid-feedback">
+                                                        Capture el máximo de docentes
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txtMaximoNinos">Máximo Estudiantes</label>
+                                                    <input type="number" class="form-control mb-4" id="txtMaximoNinos" name="MaximoNinos" required placeholder="1" value="@Model.MaximoEstudiantes">
+                                                    <div class="invalid-feedback">
+                                                        Capture el máximo de alumnos
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txtMaximoInfantes">Máximo Invitados</label>
+                                                    <input type="number" class="form-control mb-4" id="txtMaximoInfantes" name="MaximoInfantes" required placeholder="1" value="@Model.MaximoInvitados">
+                                                    <div class="invalid-feedback">
+                                                        Capture el máximo de invitados
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txtCostoAdicionalAdulto">Costo por catedraticos</label>
+                                                    <input type="number" class="form-control mb-4" name="CostoAdicionalAdulto" id="txtCostoAdicionalAdulto" step="0.10" required value="@Model.CostoAdicionalCatedraticos">
+                                                    <div class="invalid-feedback">
+                                                        Capture el costo por docente
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txtCostoAdicionalNino">Costo por estudiantes</label>
+                                                    <input type="number" class="form-control mb-4" id="txtCostoAdicionalNino" name="CostoAdicionalNino" step="0.10" required placeholder="1" value="@Model.CostoAdicionalEstudiantes">
+                                                    <div class="invalid-feedback">
+                                                        Capture el costo por estudiante
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txtCostoAdicionalInfante">Costo por invitado</label>
+                                                    <input type="number" class="form-control mb-4" id="txtCostoAdicionalInfante" name="CostoAdicionalInfante" step="0.10" required placeholder="1" value="@Model.CostoAdicionalInvitados">
+                                                    <div class="invalid-feedback">
+                                                        Capture el costo por invitado
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
+                        <div class="section contact">
+                            <div class="info">
+                                <h5 class="">Número de asientos por sección</h5>
+                                <div class="row">
+                                    <div class="col-md-11 mx-auto">
+                                        <div class="row">
+
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="txtCostoAdicionalAdulto">Sección 1</label>
+                                                    <input type="number" class="form-control mb-4" name="CamaIndividual" id="txtCamaIndividual" required value="@Model.Seccion1">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="txtCamaDoble">Sección 2</label>
+                                                    <input type="number" class="form-control mb-4" id="txtCamaDoble" name="CamaDoble" required placeholder="1" value="@Model.Seccion2">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="txtCamaQueenSize">Sección 3</label>
+                                                    <input type="number" class="form-control mb-4" id="txtCamaQueenSize" name="CamaQueenSize" required placeholder="1" value="@Model.Seccion3">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="txtCamaKingSize">Sección 4</label>
+                                                    <input type="number" class="form-control mb-4" id="txtCamaKingSize" name="CamaKingSize" required placeholder="1" value="@Model.Seccion4">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
+                        <div class="section contact">
+                            <div class="info">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h5 class="">Fotos del evento</h5>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button id="select-imgs" class="btn btn-primary">Seleccionar imagen</button>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 mx-auto">
+                                        <div class="row" id="fotosmilugar">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="account-settings-footer">
+
+        <div class="as-footer-container">
+            <button id="multiple-reset" class="btn btn-warning" style="padding: 0px;margin: 0px;border: 0px;"></button>
+            @*<div class="blockui-growl-message">
+                    <i class="flaticon-double-check"></i>&nbsp; Settings Saved Successfully
+                </div>*@
+            <button id="multiple-messages" class="btn btn-primary btnAjaxAdd" data-formulario="#AddEvento">Guardar información  </button>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div id="modal-image" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myExtraLargeModalLabel">Selecciona las imagenes necesarias</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group mb-4" style="margin-left:15px">
+                            <input type="text" class="form-control" id="txtBuscar" placeholder="Buscar imágen" aria-label="Buscar imágen">
+                            <div class="input-group-append">
+                                <button id="btnBuscarImage" class="btn btn-primary" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                    Buscar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 text-right">
+                        <button id="addImagen" class="btn btn-primary btn-rounded mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+                            Agregar imágen
+                        </button>
+                    </div>
+                </div>
+                <div id="demo-test-gallery" class="demo-gallery" data-pswp-uid="1">
+
+                </div>
+                <div class="style-select" style="display:none;">
+                    <h5 style="visibility: hidden;">Reserva en Línea</h5>
+                    <div class="radio mb-4">
+                        <div class="d-flex">
+                            <div class="n-chk">
+                                <label class="new-control new-radio radio-info">
+                                    <input type="radio" id="radio-all-controls" class="new-control-input" name="gallery-style" checked>
+                                    <span class="new-control-indicator"></span>
+                                    <span class="">
+                                        All controls<br />
+                                        <span>caption, share and fullscreen buttons, tap to toggle controls</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="radio mb-4">
+                        <div class="d-flex">
+                            <div class="n-chk">
+                                <label class="new-control new-radio radio-info">
+                                    <input type="radio" id="radio-minimal-black" class="new-control-input" name="gallery-style">
+                                    <span class="new-control-indicator"></span>
+                                    <span class="">
+                                        Minimal<br />
+                                        <span>no caption, transparent background, tap to close</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Root element of PhotoSwipe. Must have class pswp. -->
+                <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+                    <!-- Background of PhotoSwipe. It's a separate element, as animating opacity is faster than rgba(). -->
+                    <div class="pswp__bg"></div>
+
+                    <!-- Slides wrapper with overflow:hidden. -->
+                    <div class="pswp__scroll-wrap">
+                        <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+                        <!-- don't modify these 3 pswp__item elements, data is added later on. -->
+                        <div class="pswp__container">
+                            <div class="pswp__item"></div>
+                            <div class="pswp__item"></div>
+                            <div class="pswp__item"></div>
+                        </div>
+
+                        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+                        <div class="pswp__ui pswp__ui--hidden">
+
+                            <div class="pswp__top-bar">
+
+                                <!--  Controls are self-explanatory. Order can be changed. -->
+                                <div class="pswp__counter"></div>
+                                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                                <button class="pswp__button pswp__button--share" title="Share"></button>
+                                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                                <!-- element will get class pswp__preloader--active when preloader is running -->
+                                <div class="pswp__preloader">
+                                    <div class="pswp__preloader__icn">
+                                        <div class="pswp__preloader__cut">
+                                            <div class="pswp__preloader__donut"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                                <div class="pswp__share-tooltip"></div>
+                            </div>
+                            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                            </button>
+                            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                            </button>
+                            <div class="pswp__caption">
+                                <div class="pswp__caption__center"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myLargeModalLabel">Imágenes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="compose-box">
+                    <div class="compose-content" id="addTaskModalTitle">
+                        <form id="formLoadImage" action="~/Galeria/UploadImagen" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12">
+                                    <div class="upload mt-4 pr-md-4">
+                                        <input type="file" id="input-file-max-fs" name="file" class="dropify" data-allowed-file-extensions="png jpg jpeg gif bmp"
+                                               data-default-file="@Url.Content("~/admin/white/assets/img/1280x857.jpg")" data-max-file-size="2M" />
+                                        <p class="mt-2"><i class="flaticon-cloud-upload mr-1"></i> Seleccionar foto (1280 x 857 pixeles)</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="Nombre">Descripción</label>
+                                        <input type="text" class="form-control mb-4" name="Nombre" id="Nombre" required placeholder="Foto del lugar, evento, etc" value="">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Cancelar</button>
+                <button class="btn btn-primary btnAjaxAdd" data-formulario="#formLoadImage">Guardar Imágen</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="display:none;">
+    <form id="addImgs" class="section general-info" action="~/Galeria/AsignarImagenes" method="post">
+        <input type="text" name="EventoId" id="txtEventoId" />
+        <input type="text" name="LugarId" id="txtLugarId" value="@Model.LugarId" />
+        <input type="text" name="ImagenId" id="txtImagenId" />
+    </form>
+    <button id="saveImagenHotel" class="btnAjaxAdd" data-formulario="#addImgs"></button>
+</div>
+
+
+@section styles{
+    <link href="@ViewBag.Color/assets/css/users/account-setting.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="@ViewBag.Color/plugins/editors/markdown/simplemde.min.css">
+    <link href="@ViewBag.Color/plugins/lightbox/photoswipe.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.Color/plugins/lightbox/default-skin/default-skin.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.Color/plugins/lightbox/custom-photswipe.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.Color/assets/css/components/cards/card.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        .btnSelectImagen {
+            position: absolute;
+            top: 10px;
+            right: -5px;
+        }
+    </style>
+}
+@section scripts{
+    <script src="@ViewBag.Color/plugins/lightbox/photoswipe.min.js"></script>
+    <script src="@ViewBag.Color/plugins/lightbox/photoswipe-ui-default.min.js"></script>
+    <script src="@ViewBag.Color/plugins/lightbox/custom-photswipe.js"></script>
+    <script src="@ViewBag.Color/assets/js/users/account-settings.js"></script>
+    <script src="~/admin/black/plugins/editors/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCklXAp6xnGn5kRM57II5CBqSm-xZ-Kdko"></script>
+    <script>
+        $(document).ready(function () {
+            $("#txtLugarId").val($("#drpSelectLugarId").val())
+            $("#drpSelectLugarId").change(function () {
+                $("#txtLugarId").val($(this).val())
+            });
+
+           const config = {
+                language: 'es',
+                format_tags: 'p;h1;h2;h3;h5;h4;h6;pre'
+            };
+           const editor = document.getElementById("txtDescripcionSendHotel");
+           CKEDITOR.replace(editor, config);
+           $("#select-imgs").click(function (event) {
+               event.preventDefault();
+               $("#modal-image").modal("show");
+           });
+            $.ajaxSetup({ cache: false })
+           $("#demo-test-gallery").load("@Url.Content("~/Galeria/Imagenes?page=0")" + "&opcion=seleccionar&h=", function (response, status, xhr) {
+               $(".loadingCargando").hide();
+           });
+           $("#fotosmilugar").load("@Url.Content("~/Eventos/ImagenesEvento?id=" + Model.Id)", function (response, status, xhr) { });
+           $("#btnBuscarImage").click(function (event) {
+               event.preventDefault();
+               strBuscar = $("#txtBuscar").val();
+               $("#demo-test-gallery").load("@Url.Content("~/Galeria/Imagenes?page=0")" + "&strSearch=" + encodeURIComponent(strBuscar) + "&opcion=seleccionar", function (response, status, xhr) {
+                   $(".loadingCargando").hide();
+               });
+           });
+            $('#txtBuscar').keyup(function (e) {
+                if (e.keyCode == 13)
+                    $("#btnBuscarImage").trigger("click");
+            });
+            $('#addTaskModal').on('hidden.bs.modal', function (e) {
+                $('input[type="text"]').val("");
+                $('input[type="file"]').val(null);
+                $(".dropify-render").find("img").attr("src", "/admin/white/assets/img/1280x857.jpg");
+                $(".dropify-filename-inner").text("Seleccione una imágen")
+                cargar = false;
+            });
+           $("#modal-image").scroll(function () {
+               if (cargar == false) {
+                   if ($(window).scrollTop() + 200 >= $(document).height() - $(window).height()) {
+                       cargar = true;
+                       page += 1;
+                       $.get("@Url.Content("~/Galeria/Imagenes")" + "?page=" + page +
+                           "&strSearch=" + encodeURIComponent(strBuscar) + "&opcion=seleccionar", function (resultado) {
+                               if (resultado == "false" || resultado == "false\r\n") {
+                                   cargar = true;
+                               } else {
+                                   $("#demo-test-gallery").append(resultado);
+                                   cargar = false;
+                           }
+                       });
+                   }
+               }
+           });
+
+           $("#addImagen").click(function (event) {
+               event.preventDefault();
+               $("#addTaskModal").modal("show")
+           });
+
+           $("#txtId").bind("change", function() {
+               if (valorTriggerChane == true) {
+                   valorTriggerChane = false;
+                   $("#txtImagenId").val(imagenId);
+                   $("#txtLugarId").val($("#drpSelectLugarId").val())
+                   $("#txtEventoId").val($("#txtId").val());
+                   $("#saveImagenHotel").trigger("click");
+                   $(".pswp__button--close").trigger("click");
+               }
+           });
+       });
+
+        var valorTriggerChane = false;
+        var imagenId = 0;
+        function seleccionarImagen(objs) {
+            $("#addImgs").attr("action", "@Url.Content("~/Galeria/AsignarImagenes")");
+            if ($("#txtId").val() < 1) {
+                valorTriggerChane = true;
+                imagenId = $(objs).data("id");
+                $("#multiple-messages").trigger("click");
+            } else {
+                $("#txtLugarId").val($("#drpSelectLugarId").val())
+                $("#txtImagenId").val($(objs).data("id"));
+                $("#txtEventoId").val($("#txtId").val());
+                $("#saveImagenHotel").trigger("click");
+                $(".pswp__button--close").trigger("click");
+            }
+        }
+        function eliminarrelacionimagen(id, objeto) {
+            objeto.preventDefault();
+            $("#addImgs").attr("action", "@Url.Content("~/Galeria/EliminarRelacion")")
+            $("#txtImagenId").val(id);
+            $("#txtLugarId").val($("#drpSelectLugarId").val())
+                $("#txtEventoId").val($("#txtId").val());
+                $("#saveImagenHotel").trigger("click");
+        }
+    </script>
+}
