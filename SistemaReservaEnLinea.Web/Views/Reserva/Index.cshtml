@@ -67,6 +67,7 @@
                         <div class="col-12 col-md-12">
                             <div class="blog_grid_btn">
                                 <button type="submit" class="bro-btn2 btnAjaxAdd" data-formulario="#formNewCommentAdd">Comentar</button>
+                                <div id="div_sbtn1" class="bro-btn2"></div>
                             </div>
                         </div>
                         <div class="col-8 col-md-8">
@@ -148,7 +149,7 @@
                                         <td class="p-2">Total a pagar</td>
                                         <td class="p-2">$ @ViewBag.TotalEvento</td>
                                         <td class="p-2">
-                                            <button type="submit" class="btn btn-success btnAjaxAdd" data-toggle="modal" data-target="#FactModal">
+                                            <button type="submit" class="btn btn-succes" id="btnSerial" data-toggle="modal" data-target="#FactModal">
                                                 <i class="fas fa-ticket-alt">
                                                     Reservar
                                                 </i>
@@ -169,10 +170,82 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
+                    <div class="row">
+
+                        <hr />
+                        <hr />
+
+                        <div id="content" class="col-lg-12">
+                            <div class="row">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+
+                            <h1 class="h4 mb-0">Datos de Factura: <span id="txtSerial"></span></h1>
+                            <hr />
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="form-group" style="padding:7px;">
+                                        <label for="order_created" style="padding:5px;">Fecha de creacion: </label>
+                                        <input type="text" id="feDate" value="@DateTime.Now" class="datepicker-disabled form-control" disabled="" style="padding:7px;" />
+                                        <label for="supplier" style="padding:5px;">Nombre del Cliente: </label>
+                                        <input type="text" placeholder="Alumno o Docente" style="padding:7px;">
+                                        <label for="order_created">Evento a Reservar: @Model.Titulo</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <hr />
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <strong>Total Comprobante:</strong>
+                                        <strong style="padding:7px;"><input value="@ViewBag.TotalReserva" readonly type="text" id="total" class="form-control" placeholder=""></strong>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="card card-body card-subtotals bg-light">
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <div>Cantidad de productos</div>
+                                                <div style="padding:7px;"><input value="@ViewBag.Cantidad" readonly type="text" id="cantidad" class="form-control" placeholder=""></div>
+                                            </li>
+
+                                            <li>
+                                                <div>Total Venta</div>
+                                                <div style="padding:7px;"><input value="$ @ViewBag.TotalEvento" readonly type="text" id="totalVenta" class="form-control" placeholder=""></div>
+                                            </li>
+
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12" id="editor" style="text-align:center;">
+                                <hr />
+                                <button id="cmd" class="btn btn-primary">Generar Factura</button>
+                                <button type="button" class="btn btn-primary" id="btnSerial">Generar número</button>
+
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
         </div>
-    </div>
-</section>
 
+    </div>
+
+</section>
+<script src="~/js/html2pdf.bundle.min.js"></script>
+@section scripts{
+    <script src="https://www.paypal.com/sdk/js?client-id=ATiy4eCWDb1i64rRo5HXitwaN8Ep4AnePZQxkrWewpd7S_RPDhGk306xctYnoyKKxAQ6Q5ciTGW0mBGF" id="paypal_sdk"></script>
+    <script>
+        paypal.Buttons().render('#div_sbtn1');
+    </script>
+}

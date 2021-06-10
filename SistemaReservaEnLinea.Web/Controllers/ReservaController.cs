@@ -42,12 +42,12 @@ namespace SistemaReservaEnLinea.Web.Controllers
             //read cookie from Request object  
             string checkinlp = Request.Cookies["checkinlp"];
             string checkoutlp = Request.Cookies["checkoutlp"];
-            string adultoslp = Request.Cookies["adultoslp"];
-            string ninolp = Request.Cookies["ninolp"];
+            string catedraticoslp = Request.Cookies["catedraticoslp"];
+            string estudianteslp = Request.Cookies["estudianteslp"];
 
             ViewBag.CheckIn = checkinlp;
             ViewBag.CheckOut = checkoutlp;
-            ViewBag.Cantidad = (Int32.Parse(adultoslp) + Int32.Parse(ninolp)).ToString();
+            ViewBag.Cantidad = (Int32.Parse(catedraticoslp) + Int32.Parse(estudianteslp)).ToString();
             
             DateTime fecha1 = DateTime.Now;
             DateTime fecha2 = DateTime.Now;

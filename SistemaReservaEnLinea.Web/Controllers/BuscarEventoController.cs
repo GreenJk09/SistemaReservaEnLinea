@@ -53,8 +53,8 @@ namespace SistemaReservaEnLinea.Web.Controllers
               (c.Reservas.FechaReservaInicia >= _fecha2 && c.Reservas.FechaReservaFinaliza <= _fecha2)).Select(c => c.Id);
             Set("checkinlp", _fecha.ToString("dd/MM/yyyy"), 180);
             Set("checkoutlp", _fecha2.ToString("dd/MM/yyyy"), 180);
-            Set("adultoslp", catedraticos.ToString(), 180);
-            Set("ninolp", estudiantes.ToString(), 180);
+            Set("catedraticoslp", catedraticos.ToString(), 180);
+            Set("estudianteslp", estudiantes.ToString(), 180);
             lstEventos = _dbContext.Eventos.Include(c => c.Lugar).Where(c => c.Activo == true && !idH.Contains(c.Id)).ToList();
             foreach (var item in lstEventos)
             {
