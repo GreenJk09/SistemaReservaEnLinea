@@ -77,7 +77,7 @@ namespace SistemaReservaEnLinea.Web.Controllers
                 }
                 catch(Exception ex)
                 {
-                    await _emailSender.SendEmailAsync("carlos.hernandez191137@liveusam.edu.sv", "Error", ex.Message);
+                    await _emailSender.SendEmailAsync(model.Email, "Error", ex.Message);
                 }
                
 
@@ -117,12 +117,12 @@ namespace SistemaReservaEnLinea.Web.Controllers
                         response.Close();
                         readStream.Close();
                     }
-                    await _emailSender.SendEmailAsync("carlos.hernandez191137@liveusam.edu.sv", "Recuperación de cuenta", strMensaje);
+                    await _emailSender.SendEmailAsync(model.Email, "Recuperación de cuenta", strMensaje);
                     return new JsonResult(new Response { IsSuccess = true, Message = "Se envío la información de su cuenta a su correo.", Url =""});
                 }
                 catch (Exception ex)
                 {
-                    await _emailSender.SendEmailAsync("carlos.hernandez191137@liveusam.edu.sv", "Error", ex.Message);
+                    await _emailSender.SendEmailAsync("hkarlos694@gmail.com", "Error", ex.Message);
                 }
 
 
@@ -177,7 +177,9 @@ namespace SistemaReservaEnLinea.Web.Controllers
                         response.Close();
                         readStream.Close();
                     }
-                    await _emailSender.SendEmailAsync("carlos.hernandez191137@liveusam.edu.sv", "Bienvenido a Reserva en Línea", strMensaje);
+                    await _emailSender.SendEmailAsync(model.Email, "Bienvenido a Reserva en Línea", strMensaje);
+                    await _emailSender.SendEmailAsync("karlosdh98@outlook.es", "Bienvenido a Reserva en Línea", strMensaje);
+                    await _emailSender.SendEmailAsync("hkarlos694@gmail.com", "Bienvenido a Reserva en Línea", strMensaje);
                     return new JsonResult(new Response { IsSuccess = true, Message = "Se creo el usuario correctamente." , Url=""});
                 }
             }

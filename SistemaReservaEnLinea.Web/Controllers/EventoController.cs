@@ -37,7 +37,7 @@ namespace SistemaReservaEnLinea.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EnviarComentaio(string Nombre, string email, string mensaje, int? PadreId, int HabitacionId)
+        public async Task<IActionResult> EnviarComentaio(string Nombre, string email, string mensaje, int? PadreId, int EventoId)
         {
             if (string.IsNullOrEmpty(Nombre) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(mensaje))
                 return new JsonResult(new Response { IsSuccess = false, Message = "Todos los campos son requeridos" });
@@ -47,7 +47,7 @@ namespace SistemaReservaEnLinea.Web.Controllers
                 Comentario = mensaje,
                 Email = email,
                 Fecha = DateTime.Now,
-                EventoId = HabitacionId,
+                EventoId = EventoId,
                 Nombre = Nombre,
                 ParentId = PadreId
             };

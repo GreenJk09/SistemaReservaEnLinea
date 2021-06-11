@@ -22,11 +22,11 @@ namespace SistemaReservaEnLinea.Tools.Services
             try
             {
                 // Credentials
-                var credentials = new NetworkCredential(_emailSettings.Sender, _emailSettings.Password);
+                var credentials = new NetworkCredential(_emailSettings.Email, _emailSettings.Password);
                 // Mail message
                 var mail = new MailMessage()
                 {
-                    From = new MailAddress(_emailSettings.Sender, "La Pesca en Línea"),
+                    From = new MailAddress(_emailSettings.Email, "Reserva en Línea"),
                     Subject = subject,
                     Body = message,
                     IsBodyHtml = true
@@ -37,10 +37,10 @@ namespace SistemaReservaEnLinea.Tools.Services
                 // Smtp client
                 var client = new SmtpClient()
                 {
-                    Port = _emailSettings.MailPort,
+                    Port = _emailSettings.Port,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     UseDefaultCredentials = false,
-                    Host = _emailSettings.MailServer,
+                    Host = _emailSettings.Host,
                     EnableSsl = _emailSettings.EnableSsl,
                     Credentials = credentials
                 };

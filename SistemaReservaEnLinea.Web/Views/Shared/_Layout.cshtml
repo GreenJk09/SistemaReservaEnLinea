@@ -40,9 +40,9 @@
         <div class="container hidden-main">
             <div class="row">
                 <div class="col-md-2 logo">
-                    @{ 
+                    @{
                         string strLogo = "~/images/header-logo-2.png";
-                        if(ViewBag.Config.LogoPrincipal!=null || !string.IsNullOrEmpty(ViewBag.Config.LogoPrincipal))
+                        if (ViewBag.Config.LogoPrincipal != null || !string.IsNullOrEmpty(ViewBag.Config.LogoPrincipal))
                         {
                             strLogo = "~/FileUpload/" + ViewBag.Config.LogoPrincipal;
                         }
@@ -379,9 +379,11 @@
         var urlLoading = '@Url.Content("~/admin/white/plugins/lightbox/default-skin/preloader.gif")'
     </script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="~/js/jquery-3.2.1.min.js"></script>
     <script src="~/js/jquery-migrate-3.0.0.min.js"></script>
     <script src="~/js/sweetalert2.all.min.js"></script>
+    <script src="~/js/html2pdf.bundle.min.js"></script>
     <script src="~/js/jquery.form.js"></script>
     <!-- Plugins -->
     <script src="~/js/popper.min.js"></script>

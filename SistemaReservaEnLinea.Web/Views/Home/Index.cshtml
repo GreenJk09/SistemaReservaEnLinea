@@ -23,12 +23,12 @@
                     <div class="reservation-tabs">
 
                         <ul class="nav nav-tabs search-opt">
-                            <li><a href="#hotels-tab" class="active" data-toggle="tab">Buscar Evento</a></li>
+                            <li><a href="#events-tab" class="active" data-toggle="tab">Buscar Evento</a></li>
                         </ul>
 
                     </div>
                     <div class="tab-content">
-                        <form id="hotels-tab" class="tab-pane form-inline reservation-hotel active" method="post" name="reservationform">
+                        <form id="events-tab" class="tab-pane form-inline reservation-hotel active" method="post" name="reservationform">
                             <div class="row">
                                 <div class="col-md-3 step-where">
                                     <div class="form-group">
@@ -207,7 +207,7 @@
             }
             else
             {
-                foreach (var item in ViewBag.HabitacionesTop)
+                foreach (var item in ViewBag.EventosTop)
                 {
                     string strImg = "top-deal-2.jpg";
                     foreach (var itemchild in item.ImagenesAsociadas)
@@ -263,7 +263,7 @@
         <div class="row recomended-slick">
             @if (ViewBag.Config.Universidad == "Universidad")
             {
-                foreach (var item in ViewBag.HotelesRecomendados)
+                foreach (var item in ViewBag.LugaresRecomendados)
                 {
                     string strImg = "recomand-hotel-image-1.jpg";
                     foreach (var itemchild in item.ImagenesAsociadas)
@@ -309,7 +309,7 @@
             }
             else
             {
-                foreach (var item in ViewBag.HabitacionesRecomendados)
+                foreach (var item in ViewBag.EventosRecomendados)
                 {
                     string strImg = "recomand-hotel-image-1.jpg";
                     foreach (var itemchild in item.ImagenesAsociadas)

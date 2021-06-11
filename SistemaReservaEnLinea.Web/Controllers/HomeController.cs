@@ -58,7 +58,7 @@ namespace SistemaReservaEnLinea.Web.Controllers
 
                     }
                 }
-                ViewBag.HotelesRecomendados = lugares;
+                ViewBag.LugaresRecomendados = lugares;
             }
             else
             {
@@ -71,7 +71,7 @@ namespace SistemaReservaEnLinea.Web.Controllers
 
                     }
                 }
-                ViewBag.HabitacionesRecomendados = eventos;
+                ViewBag.EventosRecomendados = eventos;
             }
         }
 
@@ -107,8 +107,8 @@ namespace SistemaReservaEnLinea.Web.Controllers
                 {
                     ids.AddRange(_dbContext.Eventos.Where(c => c.Activo == true && !ids.Contains(c.Id)).Select(c => c.Id).Take(idsFaltantes));
                 }
-                List<SistemaReservaEnLinea.Models.Eventos> habitaciones = _dbContext.Eventos.Where(c => c.Activo == true && ids.Contains(c.Id)).Take(5).Include(c => c.ImagenesAsociadas).ToList();
-                foreach (var item in habitaciones)
+                List<SistemaReservaEnLinea.Models.Eventos> eventos = _dbContext.Eventos.Where(c => c.Activo == true && ids.Contains(c.Id)).Take(5).Include(c => c.ImagenesAsociadas).ToList();
+                foreach (var item in eventos)
                 {
                     foreach (var itemchild in item.ImagenesAsociadas)
                     {
@@ -116,7 +116,7 @@ namespace SistemaReservaEnLinea.Web.Controllers
 
                     }
                 }
-                ViewBag.HabitacionesTop = habitaciones;
+                ViewBag.EventosTop = eventos;
             }
         }
 
@@ -144,7 +144,7 @@ namespace SistemaReservaEnLinea.Web.Controllers
             }
             catch (Exception ex)
             {
-                await _emailSender.SendEmailAsync("jiestrada@live.com.mx", "Error La Pesca en Línea ", ex.Message);
+                await _emailSender.SendEmailAsync("hkarlos694@gmail.com", "Error  ", ex.Message);
                 return new JsonResult(new Response { IsSuccess = false, Message = "No se pudo suscribir por el momento, intentelo más tarde." });
             }
 

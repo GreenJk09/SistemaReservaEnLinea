@@ -45,13 +45,13 @@ namespace SistemaReservaEnLinea.Web.Controllers
             var usuario = await AutenticacionHelper.GetUsuario(HttpContext, _emailSender);
             if (IdLugar != null)
             {
-                var habitaciones = _dbContext.Lugar.Where(c => c.Id == IdLugar && c.UsuarioId == usuario.Id).Include(c => c.Evento);
-                return PartialView(habitaciones);
+                var eventos = _dbContext.Lugar.Where(c => c.Id == IdLugar && c.UsuarioId == usuario.Id).Include(c => c.Evento);
+                return PartialView(eventos);
             }
             else
             {
-                var habitaciones = _dbContext.Lugar.Where(c => c.UsuarioId == usuario.Id).Include(c => c.Evento);
-                return PartialView(habitaciones);
+                var eventos = _dbContext.Lugar.Where(c => c.UsuarioId == usuario.Id).Include(c => c.Evento);
+                return PartialView(eventos);
             }
         }
         public async Task<IActionResult> AddEvento(int? id)
@@ -60,15 +60,15 @@ namespace SistemaReservaEnLinea.Web.Controllers
             if (!HttpContext.User.Identity.IsAuthenticated)
                 return RedirectToAction("Index", "Home");
             var usuario = await AutenticacionHelper.GetUsuario(HttpContext, _emailSender);
-            SistemaReservaEnLinea.Models.Eventos habitacion = new SistemaReservaEnLinea.Models.Eventos();
+            SistemaReservaEnLinea.Models.Eventos evento = new SistemaReservaEnLinea.Models.Eventos();
             var lugar = _dbContext.Lugar.Where(c => c.UsuarioId == usuario.Id && c.Estatus==true);
             ViewBag.Lugares = lugar;
             if (id != null)
             {
                 var ids = lugar.Select(c => c.Id);
-                habitacion = _dbContext.Eventos.Where(c => ids.Contains(c.LugarId) && c.Id == id).FirstOrDefault();
-                if (habitacion == null)
-                    habitacion = new SistemaReservaEnLinea.Models.Eventos();
+                evento = _dbContext.Eventos.Where(c => ids.Contains(c.LugarId) && c.Id == id).FirstOrDefault();
+                if (evento == null)
+                    evento = new SistemaReservaEnLinea.Models.Eventos();
             }
             ViewBag.Color = usuario.ColorTema == "w" ? Url.Content("~/admin/white") : Url.Content("~/admin/black");
             List<Pagina> p = new List<Pagina>();
@@ -80,7 +80,7 @@ namespace SistemaReservaEnLinea.Web.Controllers
             ViewBag.Instalaciones = instalaciones;
             ViewBag.InstalacionesDivs = instalaciones.Count() / 3;
 
-            return PartialView(habitacion);
+            return PartialView(evento);
         }
 
         [HttpPost]
